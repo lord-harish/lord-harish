@@ -1,0 +1,65 @@
+[2m4:17:21 pm[22m [31m[1m[vite][22m[39m [31m[2m(client)[22m[39m Pre-transform error: D:\Porfolio\src\components\Projects\Projects.jsx: ES2015 named imports do not destructure. Use another statement for destructuring after the import. (5:22)
+
+[0m [90m 3 |[39m [36mimport[39m [33mGlassCard[39m [36mfrom[39m [32m'../GlassCard/GlassCard.jsx'[39m[33m;[39m
+ [90m 4 |[39m [36mimport[39m [33mSectionTitle[39m [36mfrom[39m [32m'../SectionTitle/SectionTitle.jsx'[39m[33m;[39m
+[31m[1m>[22m[39m[90m 5 |[39m [36mimport[39m { projectIcon[33m:[39m [33mProjectIcon[39m[33m,[39m projects } [36mfrom[39m [32m'../../data/portfolio.js'[39m[33m;[39m
+ [90m   |[39m                       [31m[1m^[22m[39m
+ [90m 6 |[39m [36mimport[39m { revealContainer[33m,[39m revealItem } [36mfrom[39m [32m'../../hooks/useScrollReveal.js'[39m[33m;[39m
+ [90m 7 |[39m
+ [90m 8 |[39m [36mfunction[39m [33mProjectActions[39m({ featured }) {[0m
+  Plugin: [35mvite:react-babel[39m
+  File: [36mD:/Porfolio/src/components/Projects/Projects.jsx[39m:5:22
+[33m  3  |  import GlassCard from '../GlassCard/GlassCard.jsx';
+  4  |  import SectionTitle from '../SectionTitle/SectionTitle.jsx';
+  5  |  import { projectIcon: ProjectIcon, projects } from '../../data/portfolio.js';
+     |                        ^
+  6  |  import { revealContainer, revealItem } from '../../hooks/useScrollReveal.js';
+  7  |  [39m
+[2m4:17:21 pm[22m [31m[1m[vite][22m[39m [31mInternal server error: D:\Porfolio\src\components\Projects\Projects.jsx: ES2015 named imports do not destructure. Use another statement for destructuring after the import. (5:22)
+
+[0m [90m 3 |[31m [36mimport[31m [33mGlassCard[31m [36mfrom[31m [32m'../GlassCard/GlassCard.jsx'[31m[33m;[31m
+ [90m 4 |[31m [36mimport[31m [33mSectionTitle[31m [36mfrom[31m [32m'../SectionTitle/SectionTitle.jsx'[31m[33m;[31m
+[31m[1m>[22m[31m[90m 5 |[31m [36mimport[31m { projectIcon[33m:[31m [33mProjectIcon[31m[33m,[31m projects } [36mfrom[31m [32m'../../data/portfolio.js'[31m[33m;[31m
+ [90m   |[31m                       [31m[1m^[22m[31m
+ [90m 6 |[31m [36mimport[31m { revealContainer[33m,[31m revealItem } [36mfrom[31m [32m'../../hooks/useScrollReveal.js'[31m[33m;[31m
+ [90m 7 |[31m
+ [90m 8 |[31m [36mfunction[31m [33mProjectActions[31m({ featured }) {[0m[39m
+  Plugin: [35mvite:react-babel[39m
+  File: [36mD:/Porfolio/src/components/Projects/Projects.jsx[39m:5:22
+[33m  3  |  import GlassCard from '../GlassCard/GlassCard.jsx';
+  4  |  import SectionTitle from '../SectionTitle/SectionTitle.jsx';
+  5  |  import { projectIcon: ProjectIcon, projects } from '../../data/portfolio.js';
+     |                        ^
+  6  |  import { revealContainer, revealItem } from '../../hooks/useScrollReveal.js';
+  7  |  [39m
+      at constructor (D:\Porfolio\node_modules\@babel\parser\lib\index.js:365:19)
+      at JSXParserMixin.raise (D:\Porfolio\node_modules\@babel\parser\lib\index.js:6616:19)
+      at JSXParserMixin.parseNamedImportSpecifiers (D:\Porfolio\node_modules\@babel\parser\lib\index.js:14406:22)
+      at JSXParserMixin.parseImportSpecifiersAndAfter (D:\Porfolio\node_modules\@babel\parser\lib\index.js:14259:37)
+      at JSXParserMixin.parseImport (D:\Porfolio\node_modules\@babel\parser\lib\index.js:14252:17)
+      at JSXParserMixin.parseStatementContent (D:\Porfolio\node_modules\@babel\parser\lib\index.js:12893:27)
+      at JSXParserMixin.parseStatementLike (D:\Porfolio\node_modules\@babel\parser\lib\index.js:12784:17)
+      at JSXParserMixin.parseModuleItem (D:\Porfolio\node_modules\@babel\parser\lib\index.js:12761:17)
+      at JSXParserMixin.parseBlockOrModuleBlockBody (D:\Porfolio\node_modules\@babel\parser\lib\index.js:13333:36)
+      at JSXParserMixin.parseBlockBody (D:\Porfolio\node_modules\@babel\parser\lib\index.js:13326:10)
+      at JSXParserMixin.parseProgram (D:\Porfolio\node_modules\@babel\parser\lib\index.js:12639:10)
+      at JSXParserMixin.parseTopLevel (D:\Porfolio\node_modules\@babel\parser\lib\index.js:12629:25)
+      at JSXParserMixin.parse (D:\Porfolio\node_modules\@babel\parser\lib\index.js:14505:25)
+      at parse (D:\Porfolio\node_modules\@babel\parser\lib\index.js:14539:38)
+      at parser (D:\Porfolio\node_modules\@babel\core\lib\parser\index.js:41:34)
+      at parser.next (<anonymous>)
+      at normalizeFile (D:\Porfolio\node_modules\@babel\core\lib\transformation\normalize-file.js:51:37)
+      at normalizeFile.next (<anonymous>)
+      at run (D:\Porfolio\node_modules\@babel\core\lib\transformation\index.js:22:50)
+      at run.next (<anonymous>)
+      at transform (D:\Porfolio\node_modules\@babel\core\lib\transform.js:22:33)
+      at transform.next (<anonymous>)
+      at step (D:\Porfolio\node_modules\gensync\index.js:261:32)
+      at D:\Porfolio\node_modules\gensync\index.js:273:13
+      at async.call.result.err.err (D:\Porfolio\node_modules\gensync\index.js:223:11)
+      at D:\Porfolio\node_modules\gensync\index.js:189:28
+      at D:\Porfolio\node_modules\@babel\core\lib\gensync-utils\async.js:67:7
+      at D:\Porfolio\node_modules\gensync\index.js:113:33
+      at step (D:\Porfolio\node_modules\gensync\index.js:287:14)
+      at D:\Porfolio\node_modules\gensync\index.js:273:13
+      at async.call.result.err.err (D:\Porfolio\node_modules\gensync\index.js:223:11)
