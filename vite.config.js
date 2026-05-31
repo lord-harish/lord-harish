@@ -1,7 +1,7 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
-const base = '/';
+const base = '/lord-harish/';
 
 export default defineConfig({
   plugins: [react()],
