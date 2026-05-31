@@ -195,7 +195,7 @@ export const education = [
     status: 'Completed',
     icon: GraduationCap,
     description:
-      'Successfully completed diploma studies with strong practical exposure in technology, programming, and project-based learning.',
+      'Successfully completed diploma studies at PSG Polytechnic College with strong practical exposure in technology, programming, and project-based learning.',
   },
   {
     title: 'Lateral Entry B.E / B.Tech Journey',
