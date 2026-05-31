@@ -8,7 +8,7 @@ function getAssetUrl(path) {
 
 export default function OutputGallery({ outputs }) {
   return (
-    <div className="grid gap-5 md:grid-cols-3">
+    <div className="grid gap-5 md:grid-cols-2">
       {outputs.map((output, index) => (
         <motion.div
           key={output.path}
@@ -18,7 +18,7 @@ export default function OutputGallery({ outputs }) {
           transition={{ duration: 0.6, delay: index * 0.08, ease: [0.22, 1, 0.36, 1] }}
           whileHover={{ y: -6 }}
           className={`group overflow-hidden rounded-lg border border-white/10 bg-white/[0.04] ${
-            output.featured ? 'md:col-span-3' : ''
+            output.featured ? 'md:col-span-2' : ''
           }`}
         >
           <div

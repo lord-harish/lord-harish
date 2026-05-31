@@ -3,6 +3,7 @@ import {
   Bot,
   BrainCircuit,
   BriefcaseBusiness,
+  ChartCandlestick,
   CircuitBoard,
   Code2,
   DatabaseZap,
@@ -15,6 +16,7 @@ import {
 } from 'lucide-react';
 
 export const skillCategories = [
+
   {
     title: 'AI / Machine Learning',
     icon: BrainCircuit,
@@ -60,6 +62,20 @@ export const skillCategories = [
     icon: ServerCog,
     description: 'Using powerful tools and environments for efficient development workflows.',
     skills: ['GitHub', 'VS Code', 'Ubuntu/Linux', 'Windows Development', 'Firebase', 'API Integration'],
+  },
+  {
+    title: 'Trading',
+    icon: ChartCandlestick,
+    description: 'Making money with trading using technical analysis, machine learning, and AI-based strategies to predict market movements and optimize trading decisions.',
+    skills: [
+      'swing trading',
+      'XAUUSD',
+      'technical analysis',
+      'fundamental analysis',
+      'machine learning for trading',
+      'AI-based trading strategies',
+      'backtesting',
+    ],
   },
 ];
 
@@ -113,14 +129,16 @@ export const projects = [
     status: 'Completed',
   },
   {
-    slug: 'data-bot',
-    title: 'DATA BOT',
-    category: 'WhatsApp Smart Assistant',
+    slug: 'trading-bot',
+    title: 'TRADING BOT',
+    category: 'AI-based Trading System',
+    priority: 'Active Project',
     description:
-      'A WhatsApp chatbot system designed to intelligently store and retrieve messages, media, links, and files using simple command-based interaction.',
-    features: ['Smart data storage', 'Media retrieval', 'Command automation', 'Text & file support', 'Fast search system'],
+      'An AI-powered trading bot designed to analyze market data, predict price movements, and also verifies the Economic calendar to make informed trading decisions in the financial markets and powered by Gemini API.',
+    features: ['AI-based trading strategies', 'Market prediction', 'Economic calendar integration', 'Real-time market analysis', 'Gemini API integration',],
     tech: ['Python', 'Automation', 'API Integration'],
-    status: 'In Progress',
+    status: 'Successfully Running',
+    featured: true,
   },
   {
     slug: 'water-leakage-detection',

@@ -199,6 +199,44 @@ export const projectsData = [
     learnings:
       'Improved knowledge of sensor integration, embedded workflows, and practical IoT automation design.',
   },
+  {
+    slug: 'trading-bot',
+    title: 'TRADING BOT',
+    category: 'AI-based Trading System',
+    status: 'Successfully Running',
+    summary:
+      'An AI-powered trading bot designed to analyze market data, predict price movements, and verify the Economic calendar to make informed trading decisions in financial markets.',
+    overview: [
+      'The Trading Bot is an intelligent system powered by Gemini API that continuously analyzes market data and economic indicators.',
+      'It combines AI-based trading strategies with economic calendar verification to identify profitable trading opportunities and execute decisions with precision.',
+    ],
+    objective: 'To automate trading decisions using AI analysis and market predictions to optimize trading returns.',
+    features: [
+      'AI-based trading strategies',
+      'Market prediction models',
+      'Economic calendar integration',
+      'Real-time market analysis',
+      'Gemini API integration',
+      'Automated decision making',
+    ],
+    techStack: ['Python', 'Automation', 'API Integration', 'Gemini API', 'AI/ML'],
+    workflow: [
+      'Bot fetches real-time market data',
+      'AI model analyzes price patterns',
+      'Economic calendar is checked',
+      'Trading signals are generated',
+      'Trading plan and predictions are given',
+    ],
+    outputs: [
+      { title: 'Interface', type: 'UI Preview', path: '/assets/projects/trading-bot/output1.png', aspect: 'video' },
+      { title: 'Output', type: 'Prediction Output', path: '/assets/projects/trading-bot/output2.png', aspect: 'video' },
+      { title: 'Outcome', type: 'Results', path: '/assets/projects/trading-bot/output3.png' },
+    ],
+    challenges:
+      'Developing accurate prediction models, handling market volatility, and ensuring economic calendar data is current and relevant.',
+    learnings:
+      'Strengthened expertise in AI trading strategies, API integration with Gemini, real-time data processing, and automated decision systems.',
+  },
 ];
 
 export function getProjectBySlug(slug) {
