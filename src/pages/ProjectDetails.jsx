@@ -26,17 +26,17 @@ export default function ProjectDetails() {
 
       <div className="mx-auto grid max-w-7xl gap-6 px-4 pb-20 sm:px-6 lg:px-8">
         <ProjectSection title="Project Overview" eyebrow="Overview">
-          <div className="space-y-5 text-sm leading-8 text-slate-300 sm:text-base">
+          <div className="space-y-5 text-sm leading-8 text-secondary sm:text-base">
             {project.overview.map((paragraph) => (
               <p key={paragraph}>{paragraph}</p>
             ))}
           </div>
-          <div className="mt-7 rounded-md border border-neon/25 bg-neon/10 p-5">
+          <div className="mt-7 rounded-xl border border-neon/15 bg-neon/[0.04] p-5">
             <div className="flex items-start gap-4">
-              <Target className="mt-1 shrink-0 text-neon" size={22} aria-hidden="true" />
+              <Target className="mt-1 shrink-0 text-neon/70" size={20} aria-hidden="true" />
               <div>
-                <p className="text-sm font-black uppercase tracking-[0.18em] text-neon">Objective</p>
-                <p className="mt-2 text-sm leading-7 text-slate-200">{project.objective}</p>
+                <p className="text-[0.6rem] font-bold uppercase tracking-[0.25em] text-neon/70">Objective</p>
+                <p className="mt-2 text-sm leading-7 text-secondary">{project.objective}</p>
               </div>
             </div>
           </div>
@@ -45,9 +45,12 @@ export default function ProjectDetails() {
         <ProjectSection title="Core Features" eyebrow="Features">
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {project.features.map((feature) => (
-              <div key={feature} className="rounded-md border border-white/10 bg-white/[0.04] p-5 transition hover:border-neon/35 hover:shadow-neon">
-                <CheckCircle2 className="mb-4 text-neon" size={21} aria-hidden="true" />
-                <p className="font-bold leading-7 text-slate-100">{feature}</p>
+              <div
+                key={feature}
+                className="rounded-xl border border-white/6 bg-white/[0.03] p-5 transition-all duration-300 hover:border-neon/20 hover:shadow-neon"
+              >
+                <CheckCircle2 className="mb-4 text-neon/60" size={19} aria-hidden="true" />
+                <p className="font-semibold leading-7 text-white/90">{feature}</p>
               </div>
             ))}
           </div>
@@ -64,13 +67,13 @@ export default function ProjectDetails() {
         <ProjectSection title="Workflow / How It Works" eyebrow="Process">
           <div className="space-y-4">
             {project.workflow.map((step, index) => (
-              <div key={step} className="flex gap-4 rounded-md border border-white/10 bg-white/[0.04] p-4">
-                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-md border border-electric/30 bg-electric/10 text-sm font-black text-electric shadow-electric">
+              <div key={step} className="flex gap-4 rounded-xl border border-white/6 bg-white/[0.03] p-4">
+                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-neon/15 bg-neon/[0.06] text-sm font-black text-neon/70">
                   {String(index + 1).padStart(2, '0')}
                 </span>
                 <div>
-                  <Route className="mb-2 text-neon" size={18} aria-hidden="true" />
-                  <p className="font-bold leading-7 text-slate-100">{step}</p>
+                  <Route className="mb-2 text-neon/50" size={16} aria-hidden="true" />
+                  <p className="font-semibold leading-7 text-white/90">{step}</p>
                 </div>
               </div>
             ))}
@@ -83,11 +86,11 @@ export default function ProjectDetails() {
 
         <div className="grid gap-6 lg:grid-cols-2">
           <ProjectSection title="Challenges Faced" eyebrow="Build Notes">
-            <p className="text-sm leading-8 text-slate-300 sm:text-base">{project.challenges}</p>
+            <p className="text-sm leading-8 text-secondary sm:text-base">{project.challenges}</p>
           </ProjectSection>
 
           <ProjectSection title="Learnings / Outcomes" eyebrow="Growth">
-            <p className="text-sm leading-8 text-slate-300 sm:text-base">{project.learnings}</p>
+            <p className="text-sm leading-8 text-secondary sm:text-base">{project.learnings}</p>
           </ProjectSection>
         </div>
 

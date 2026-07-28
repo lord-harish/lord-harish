@@ -1,5 +1,8 @@
-import { motion } from 'framer-motion';
-import { Sparkles } from 'lucide-react';
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Menu, X } from 'lucide-react';
+import useScrollDirection from '../../hooks/useScrollDirection.js';
+import useActiveSection from '../../hooks/useActiveSection.js';
 
 const navItems = [
   { label: 'Home', href: '#home' },
@@ -11,35 +14,128 @@ const navItems = [
   { label: 'Contact', href: '#contact' },
 ];
 
-export default function Navbar() {
+function NavLink({ item, isActive, onClick }) {
   return (
-    <motion.header
-      initial={{ y: -28, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
-      className="fixed left-0 right-0 top-0 z-50 border-b border-white/10 bg-void/58 backdrop-blur-2xl"
+    <a
+      href={item.href}
+      onClick={onClick}
+      className="group relative px-3 py-2 text-xs font-semibold uppercase tracking-[0.15em] transition-colors duration-300 lg:text-[0.7rem]"
+      style={{ color: isActive ? '#00FF88' : '#BFBFBF' }}
     >
-      <nav className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-        <a href="#home" className="group flex items-center gap-3" aria-label="Harish Pranav V home">
-          <span className="flex h-9 w-9 items-center justify-center rounded-md border border-neon/30 bg-neon/10 text-neon shadow-neon">
-            <Sparkles size={18} aria-hidden="true" />
-          </span>
-        </a>
+      {item.label}
+      {/* Active indicator */}
+      <motion.span
+        className="absolute -bottom-1 left-1/2 h-[2px] rounded-full bg-neon"
+        initial={false}
+        animate={{
+          width: isActive ? '60%' : '0%',
+          x: '-50%',
+          opacity: isActive ? 1 : 0,
+        }}
+        transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+        style={{ boxShadow: isActive ? '0 0 8px rgba(0,255,136,0.5)' : 'none' }}
+      />
+      {/* Hover underline */}
+      {!isActive && (
+        <span className="absolute -bottom-1 left-1/2 h-[1px] w-0 -translate-x-1/2 rounded-full bg-white/30 transition-all duration-300 group-hover:w-[40%]" />
+      )}
+    </a>
+  );
+}
 
-        <div className="hidden items-center gap-4 lg:gap-6 md:flex">
-          {navItems.map((item) => (
-            <a
-              key={item.label}
-              href={item.href}
-              className="text-xs font-semibold text-slate-300 transition hover:text-neon focus:outline-none focus:ring-2 focus:ring-neon/60 focus:ring-offset-2 focus:ring-offset-void lg:text-sm"
-            >
-              {item.label}
-            </a>
-          ))}
-        </div>
+export default function Navbar() {
+  const { scrollDirection, scrollY } = useScrollDirection();
+  const activeSection = useActiveSection();
+  const [mobileOpen, setMobileOpen] = useState(false);
 
-        <span className="hidden h-9 w-9 md:block" aria-hidden="true" />
-      </nav>
-    </motion.header>
+  const isHidden = scrollDirection === 'down' && scrollY > 200;
+  const isScrolled = scrollY > 50;
+
+  const handleNavClick = () => {
+    setMobileOpen(false);
+  };
+
+  return (
+    <>
+      <motion.header
+        initial={{ y: -100 }}
+        animate={{ y: isHidden ? -100 : 0 }}
+        transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+        className="fixed left-0 right-0 top-0 z-50"
+        style={{
+          borderBottom: isScrolled ? '1px solid rgba(255,255,255,0.06)' : '1px solid transparent',
+          background: isScrolled ? 'rgba(5,5,5,0.7)' : 'rgba(5,5,5,0)',
+          backdropFilter: isScrolled ? 'blur(20px) saturate(1.2)' : 'none',
+          WebkitBackdropFilter: isScrolled ? 'blur(20px) saturate(1.2)' : 'none',
+          transition: 'background 0.4s ease, border-color 0.4s ease, backdrop-filter 0.4s ease',
+        }}
+      >
+        <nav className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+          {/* Logo / Name */}
+          <a href="#home" className="group flex items-center gap-2" aria-label="Harish Pranav V home">
+            <span className="text-sm font-black tracking-[0.08em] text-white transition-colors duration-300 group-hover:text-neon">
+              H<span className="text-neon">.</span>P
+            </span>
+          </a>
+
+          {/* Desktop nav */}
+          <div className="hidden items-center gap-1 md:flex">
+            {navItems.map((item) => (
+              <NavLink
+                key={item.label}
+                item={item}
+                isActive={activeSection === item.href.slice(1)}
+                onClick={handleNavClick}
+              />
+            ))}
+          </div>
+
+          {/* Mobile menu button */}
+          <button
+            type="button"
+            onClick={() => setMobileOpen(!mobileOpen)}
+            className="flex h-10 w-10 items-center justify-center rounded-lg border border-white/10 text-white transition hover:border-neon/30 hover:text-neon md:hidden"
+            aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
+          >
+            {mobileOpen ? <X size={18} /> : <Menu size={18} />}
+          </button>
+        </nav>
+      </motion.header>
+
+      {/* Mobile overlay */}
+      <AnimatePresence>
+        {mobileOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="fixed inset-0 z-40 md:hidden"
+            style={{
+              background: 'rgba(5,5,5,0.9)',
+              backdropFilter: 'blur(24px)',
+              WebkitBackdropFilter: 'blur(24px)',
+            }}
+          >
+            <nav className="flex h-full flex-col items-center justify-center gap-6">
+              {navItems.map((item, index) => (
+                <motion.a
+                  key={item.label}
+                  href={item.href}
+                  onClick={handleNavClick}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: index * 0.06, duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                  className="text-xl font-bold text-white transition-colors duration-200 hover:text-neon"
+                  style={{ color: activeSection === item.href.slice(1) ? '#00FF88' : '#ffffff' }}
+                >
+                  {item.label}
+                </motion.a>
+              ))}
+            </nav>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
   );
 }

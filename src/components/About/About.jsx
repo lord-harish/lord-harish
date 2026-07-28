@@ -1,5 +1,4 @@
 import { motion } from 'framer-motion';
-import { CheckCircle2 } from 'lucide-react';
 import GlassCard from '../GlassCard/GlassCard.jsx';
 import SectionTitle from '../SectionTitle/SectionTitle.jsx';
 import { interests, stats } from '../../data/profile.js';
@@ -12,9 +11,12 @@ const aboutParagraphs = [
   'I am always learning, experimenting, and building projects that push my technical skills forward while solving practical challenges.',
 ];
 
+/* Bento grid size mapping for visual variety */
+const statSizes = ['sm:col-span-1', 'sm:col-span-1', 'sm:col-span-2', 'sm:col-span-2'];
+
 export default function About() {
   return (
-    <section id="about" className="relative z-10 px-4 py-20 sm:px-6 lg:px-8">
+    <section id="about" className="relative z-10 px-4 py-24 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-7xl">
         <SectionTitle
           eyebrow="About"
@@ -23,6 +25,7 @@ export default function About() {
         />
 
         <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr]">
+          {/* About text */}
           <motion.div
             variants={revealContainer}
             initial="hidden"
@@ -30,7 +33,7 @@ export default function About() {
             viewport={{ once: true, amount: 0.2 }}
           >
             <GlassCard className="h-full p-6 sm:p-8">
-              <div className="space-y-5 text-base leading-8 text-slate-300">
+              <div className="space-y-5 text-base leading-8 text-secondary">
                 {aboutParagraphs.map((paragraph) => (
                   <motion.p key={paragraph} variants={revealItem}>
                     {paragraph}
@@ -40,29 +43,40 @@ export default function About() {
             </GlassCard>
           </motion.div>
 
-          <div className="grid gap-4 sm:grid-cols-2">
+          {/* Bento stats grid */}
+          <div className="grid grid-cols-2 gap-4">
             {stats.map((stat, index) => (
-              <GlassCard key={stat.label} delay={index * 0.08} className="p-5">
-                <p className="text-sm font-bold text-slate-400">{stat.label}</p>
-                <p className="mt-3 text-2xl font-black text-white">{stat.value}</p>
+              <GlassCard
+                key={stat.label}
+                delay={index * 0.08}
+                className={`p-5 ${statSizes[index] || ''}`}
+              >
+                <p className="text-[0.65rem] font-bold uppercase tracking-[0.25em] text-muted">{stat.label}</p>
+                <p className="mt-3 text-xl font-black text-white sm:text-2xl">{stat.value}</p>
               </GlassCard>
             ))}
           </div>
         </div>
 
-        <div className="mt-10">
-          <h3 className="mb-5 text-xl font-black text-white">Core Interests</h3>
+        {/* Core Interests */}
+        <div className="mt-12">
+          <motion.h3
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+            className="mb-6 text-xl font-black text-white"
+          >
+            Core Interests
+          </motion.h3>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {interests.map(({ label, icon: Icon }, index) => (
               <GlassCard key={label} delay={index * 0.05} className="group p-5">
                 <div className="flex items-start gap-4">
-                  <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-md border border-electric/25 bg-electric/10 text-electric transition group-hover:border-neon/40 group-hover:text-neon">
+                  <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border border-neon/15 bg-neon/[0.06] text-neon/70 transition-all duration-300 group-hover:border-neon/40 group-hover:text-neon group-hover:shadow-neon">
                     <Icon size={21} aria-hidden="true" />
                   </span>
-                  <div>
-                    <p className="font-bold leading-7 text-slate-100">{label}</p>
-                    <CheckCircle2 className="mt-3 text-neon" size={18} aria-hidden="true" />
-                  </div>
+                  <p className="font-semibold leading-7 text-white/90">{label}</p>
                 </div>
               </GlassCard>
             ))}

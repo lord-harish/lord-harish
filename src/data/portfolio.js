@@ -195,14 +195,14 @@ export const education = [
     status: 'Completed',
     icon: GraduationCap,
     description:
-      'Successfully completed diploma studies at PSG Polytechnic College with strong practical exposure in technology, programming, and project-based learning.',
+      'Successfully completed diploma in Artificial Intelligence & Machine Learning at PSG Polytechnic College with strong practical exposure in technology, programming, and project-based learning.',
   },
   {
-    title: 'Lateral Entry B.E / B.Tech Journey',
-    status: 'Starting New Journey',
+    title: 'Lateral Entry B.Tech Journey',
+    status: 'Started New Journey',
     icon: Rocket,
     description:
-      'Currently stepping into the next phase of higher education to strengthen expertise in Artificial Intelligence, Machine Learning, Software Development, and Smart Technologies.',
+      'Started the next phase of higher education B. Tech in Artificial Intelligence & Data Science at Sri Krishna College of Engineering and Technology.',
   },
 ];
 
@@ -254,7 +254,7 @@ export const achievements = [
     ],
     description:
       'Successfully completed Automating a normal home into a smart home using Home Assistant, integrating various smart devices, sensors, and automation workflows to create an intelligent living environment.',
-    highlights: ['ZIGBEE Integration', 'Home Assistant Automation', 'Voice Control Integration', 'Smart Device Management','Frigate integration'],
+    highlights: ['ZIGBEE Integration', 'Home Assistant Automation', 'Voice Control Integration', 'Smart Device Management', 'Frigate integration'],
   },
   {
     title: 'Hackathon Participation',
