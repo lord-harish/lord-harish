@@ -133,9 +133,9 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="relative z-10 flex min-h-screen items-center px-4 pb-12 pt-24 sm:px-6 lg:px-8 lg:pt-28"
+      className="relative z-10 flex flex-col justify-center px-4 pb-8 pt-20 sm:px-6 sm:pb-12 sm:pt-24 lg:min-h-screen lg:px-8 lg:pt-28"
     >
-      <div className="mx-auto grid w-full max-w-7xl items-center gap-10 lg:grid-cols-[1.15fr_0.85fr]">
+      <div className="mx-auto grid w-full max-w-7xl items-center gap-6 sm:gap-8 lg:grid-cols-[1.15fr_0.85fr] lg:gap-10">
         {/* Left Column: 3 Texts + Signals & Socials */}
         <div className="text-center lg:text-left">
           {/* Greeting Subtitle */}
@@ -154,7 +154,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-            className="mt-3 text-2xl font-extrabold tracking-tight sm:text-4xl lg:text-5xl leading-tight"
+            className="mt-2 text-2xl font-extrabold tracking-tight sm:mt-3 sm:text-4xl lg:text-5xl leading-tight"
           >
             <span className="block text-white">Student &</span>
             <span className="mt-1 block min-h-[1.2em]">
@@ -167,7 +167,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-            className="mx-auto mt-4 max-w-xl text-xs leading-relaxed text-secondary/80 sm:text-sm md:text-base lg:mx-0"
+            className="mx-auto mt-3 max-w-xl text-xs leading-relaxed text-secondary/80 sm:mt-4 sm:text-sm md:text-base lg:mx-0"
           >
             I build intelligent systems, IoT innovations, and data-driven web applications that solve real-world problems.
           </motion.p>
@@ -177,7 +177,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.3 }}
-            className="mt-6 flex flex-wrap justify-center gap-2 sm:gap-2.5 lg:justify-start"
+            className="mt-4 flex flex-wrap justify-center gap-2 sm:mt-6 sm:gap-2.5 lg:justify-start"
           >
             {signals.map(({ label, icon: Icon }) => (
               <div key={label} className="glass-pill flex items-center gap-2 rounded-full px-3 py-1.5 text-xs font-semibold text-white/90 sm:px-3.5">
@@ -198,7 +198,7 @@ export default function Hero() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.4, duration: 0.5 }}
-            className="mt-6 flex items-center justify-center gap-3 lg:justify-start"
+            className="mt-4 flex items-center justify-center gap-3 sm:mt-6 lg:justify-start"
           >
             {socialLinks.map((social) => (
               <a
@@ -220,13 +220,13 @@ export default function Hero() {
           initial={{ opacity: 0, y: 30, scale: 0.96 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
           transition={{ duration: 0.7, delay: 0.35, ease: [0.22, 1, 0.36, 1] }}
-          className="relative mx-auto w-full max-w-[210px] sm:max-w-[260px] lg:mr-0 lg:max-w-[320px]"
+          className="relative mx-auto mt-2 w-full max-w-[200px] sm:mt-0 sm:max-w-[250px] lg:mr-0 lg:max-w-[320px]"
         >
           {/* Outer Subtle Glow Rim */}
           <div className="absolute -inset-1 rounded-3xl bg-gradient-to-tr from-neon/30 via-neon/10 to-transparent blur-md opacity-50" />
 
           {/* Main Formal Stylish Glass Frame */}
-          <div className="glass-panel relative overflow-hidden rounded-3xl border border-white/20 p-3 sm:p-3.5 shadow-2xl">
+          <div className="glass-panel relative overflow-hidden rounded-3xl border border-white/20 p-2.5 sm:p-3.5 shadow-2xl">
             {/* Top Accent Specular Line */}
             <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-neon/60 to-transparent" />
 
