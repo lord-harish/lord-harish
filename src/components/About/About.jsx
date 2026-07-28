@@ -73,7 +73,7 @@ export default function About() {
             {interests.map(({ label, icon: Icon }, index) => (
               <GlassCard key={label} delay={index * 0.05} className="group p-5">
                 <div className="flex items-start gap-4">
-                  <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border border-neon/15 bg-neon/[0.06] text-neon/70 transition-all duration-300 group-hover:border-neon/40 group-hover:text-neon group-hover:shadow-neon">
+                  <span className="glass-pill flex h-11 w-11 shrink-0 items-center justify-center rounded-lg text-neon/70 group-hover:text-neon">
                     <Icon size={21} aria-hidden="true" />
                   </span>
                   <p className="font-semibold leading-7 text-white/90">{label}</p>

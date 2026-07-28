@@ -59,7 +59,7 @@ export default function Footer() {
               <a
                 key={link.label}
                 href={link.href}
-                className="rounded-lg border border-white/4 bg-white/[0.02] px-3 py-2 text-sm font-semibold text-muted transition-all duration-300 hover:border-neon/20 hover:text-neon"
+                className="glass-pill rounded-lg px-3 py-2 text-sm font-semibold text-muted hover:text-neon"
               >
                 {link.label}
               </a>
@@ -73,7 +73,7 @@ export default function Footer() {
                 <a
                   key={social.label}
                   href={social.href}
-                  className="flex h-10 w-10 items-center justify-center rounded-lg border border-white/6 bg-white/[0.02] text-muted transition-all duration-300 hover:border-neon/30 hover:text-neon hover:shadow-neon"
+                  className="glass-button flex h-10 w-10 items-center justify-center rounded-lg text-muted hover:text-neon"
                   aria-label={social.label}
                   target={social.label !== 'Send email' ? '_blank' : undefined}
                   rel={social.label !== 'Send email' ? 'noopener noreferrer' : undefined}
@@ -87,7 +87,7 @@ export default function Footer() {
             <button
               type="button"
               onClick={scrollToTop}
-              className="btn-magnetic flex h-10 items-center gap-2 rounded-lg border border-white/8 bg-white/[0.03] px-4 text-xs font-bold uppercase tracking-[0.15em] text-muted transition-all duration-300 hover:border-neon/30 hover:text-neon"
+              className="btn-magnetic glass-button flex h-10 items-center gap-2 rounded-lg px-4 text-xs font-bold uppercase tracking-[0.15em] text-muted hover:text-neon"
               aria-label="Scroll back to top"
             >
               <ArrowUp size={14} aria-hidden="true" />

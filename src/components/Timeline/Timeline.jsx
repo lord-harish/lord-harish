@@ -34,7 +34,7 @@ function TimelineEntry({ item, mode, index }) {
       <GlassCard className="p-6">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
           <div className="flex items-start gap-4">
-            <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border border-neon/15 bg-neon/[0.06] text-neon/70">
+            <span className="glass-pill flex h-11 w-11 shrink-0 items-center justify-center rounded-lg text-neon/70">
               <Icon size={20} aria-hidden="true" />
             </span>
             <div>
@@ -44,7 +44,7 @@ function TimelineEntry({ item, mode, index }) {
             </div>
           </div>
           {item.status ? (
-            <span className="w-fit rounded-lg border border-neon/20 bg-neon/[0.06] px-3 py-1.5 text-[0.6rem] font-bold uppercase tracking-[0.2em] text-neon">
+            <span className="glass-pill w-fit rounded-lg px-3 py-1.5 text-[0.6rem] font-bold uppercase tracking-[0.2em] text-neon">
               {item.status}
             </span>
           ) : null}
@@ -53,7 +53,7 @@ function TimelineEntry({ item, mode, index }) {
         <p className="mt-5 text-sm leading-7 text-secondary">{item.description}</p>
 
         {image ? (
-          <div className="mt-6 max-w-56 overflow-hidden rounded-xl border border-white/8 bg-white/[0.03]">
+          <div className="glass-pill mt-6 max-w-56 overflow-hidden rounded-xl">
             <div className="relative aspect-[9/16] overflow-hidden">
               <img
                 src={getAssetUrl(image)}

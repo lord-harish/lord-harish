@@ -11,14 +11,14 @@ function ProjectActions({ featured, slug }) {
     <div className="mt-6 flex flex-wrap gap-3">
       <Link
         to={`/projects/${slug}`}
-        className="btn-magnetic group/btn inline-flex h-10 items-center gap-2 rounded-lg border border-neon/30 bg-neon/[0.06] px-4 text-sm font-bold text-neon transition-all duration-300 hover:bg-neon/15 hover:shadow-neon"
+        className="btn-magnetic glass-button group/btn inline-flex h-10 items-center gap-2 rounded-lg px-4 text-sm font-bold text-neon"
       >
         View Details
         <ArrowUpRight size={14} className="transition-transform duration-300 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5" aria-hidden="true" />
       </Link>
       <a
         href="https://github.com/"
-        className="btn-magnetic inline-flex h-10 items-center gap-2 rounded-lg border border-white/8 px-4 text-sm font-bold text-secondary transition-all duration-300 hover:border-white/20 hover:text-white"
+        className="btn-magnetic glass-button inline-flex h-10 items-center gap-2 rounded-lg px-4 text-sm font-bold text-secondary hover:text-white"
         target="_blank"
         rel="noopener noreferrer"
       >
@@ -28,7 +28,7 @@ function ProjectActions({ featured, slug }) {
       {featured ? (
         <Link
           to={`/projects/${slug}`}
-          className="btn-magnetic inline-flex h-10 items-center gap-2 rounded-lg border border-electric/25 bg-electric/[0.06] px-4 text-sm font-bold text-electric transition-all duration-300 hover:bg-electric/15"
+          className="btn-magnetic glass-button inline-flex h-10 items-center gap-2 rounded-lg px-4 text-sm font-bold text-electric"
         >
           System Overview
         </Link>
@@ -53,15 +53,15 @@ function ProjectCard({ project }) {
         <div className="relative">
           {/* Badges */}
           <div className="mb-5 flex flex-wrap items-center gap-2.5">
-            <span className="inline-flex items-center gap-2 rounded-lg border border-white/8 bg-white/[0.04] px-3 py-1.5 text-[0.6rem] font-bold uppercase tracking-[0.18em] text-secondary">
+            <span className="glass-pill inline-flex items-center gap-2 rounded-lg px-3 py-1.5 text-[0.6rem] font-bold uppercase tracking-[0.18em] text-secondary">
               <Layers3 size={12} aria-hidden="true" />
               {project.category}
             </span>
-            <span className="rounded-lg border border-neon/20 bg-neon/[0.06] px-3 py-1.5 text-[0.6rem] font-bold uppercase tracking-[0.18em] text-neon">
+            <span className="glass-pill rounded-lg px-3 py-1.5 text-[0.6rem] font-bold uppercase tracking-[0.18em] text-neon">
               {project.status}
             </span>
             {isFeatured ? (
-              <span className="inline-flex items-center gap-1.5 rounded-lg border border-neon/30 bg-neon/10 px-3 py-1.5 text-[0.6rem] font-bold uppercase tracking-[0.18em] text-neon shadow-neon">
+              <span className="glass-pill inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-[0.6rem] font-bold uppercase tracking-[0.18em] text-neon shadow-neon">
                 <Star size={11} aria-hidden="true" />
                 Featured
               </span>
@@ -70,7 +70,7 @@ function ProjectCard({ project }) {
 
           {/* Title */}
           <div className="flex items-start gap-4">
-            <span className="mt-1 flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border border-neon/15 bg-neon/[0.06] text-neon/70 shadow-neon">
+            <span className="glass-pill mt-1 flex h-11 w-11 shrink-0 items-center justify-center rounded-lg text-neon/70 shadow-neon">
               <ProjectIcon size={20} aria-hidden="true" />
             </span>
             <div>
@@ -101,7 +101,7 @@ function ProjectCard({ project }) {
             {project.tech.map((tech) => (
               <span
                 key={tech}
-                className="rounded-lg border border-white/6 bg-white/[0.03] px-3 py-1.5 text-[0.65rem] font-semibold text-muted transition-colors duration-300 group-hover:text-secondary"
+                className="glass-pill rounded-lg px-3 py-1.5 text-[0.65rem] font-semibold text-muted group-hover:text-secondary"
               >
                 {tech}
               </span>

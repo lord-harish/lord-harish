@@ -124,10 +124,10 @@ function AchievementShowcase({ achievement, index }) {
 
         <div className={isEven ? 'lg:order-1' : ''}>
           <div className="mb-5 flex flex-wrap items-center gap-3">
-            <span className="flex h-11 w-11 items-center justify-center rounded-lg border border-neon/15 bg-neon/[0.06] text-neon/70 transition-all duration-300 group-hover:border-neon/40 group-hover:text-neon group-hover:shadow-neon">
+            <span className="glass-pill flex h-11 w-11 items-center justify-center rounded-lg text-neon/70 group-hover:text-neon">
               <Icon size={20} aria-hidden="true" />
             </span>
-            <span className="rounded-lg border border-neon/20 bg-neon/[0.06] px-3 py-1.5 text-[0.6rem] font-bold uppercase tracking-[0.2em] text-neon">
+            <span className="glass-pill rounded-lg px-3 py-1.5 text-[0.6rem] font-bold uppercase tracking-[0.2em] text-neon">
               {achievement.badge}
             </span>
           </div>
@@ -139,7 +139,7 @@ function AchievementShowcase({ achievement, index }) {
             {achievement.highlights.map((highlight) => (
               <span
                 key={highlight}
-                className="rounded-lg border border-white/6 bg-white/[0.03] px-3 py-2 text-xs font-semibold text-secondary transition-all duration-300 group-hover:border-neon/15 group-hover:text-white"
+                className="glass-pill rounded-lg px-3 py-1.5 text-xs font-semibold text-secondary group-hover:text-white"
               >
                 {highlight}
               </span>

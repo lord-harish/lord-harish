@@ -125,7 +125,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-            className="mb-8 inline-flex items-center gap-3 rounded-full border border-neon/20 bg-neon/[0.06] px-4 py-2"
+            className="glass-pill mb-8 inline-flex items-center gap-3 rounded-full px-4 py-2"
           >
             <span className="relative flex h-2.5 w-2.5">
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-neon opacity-60" />
@@ -178,7 +178,7 @@ export default function Hero() {
             </a>
             <a
               href={emailUrl}
-              className="btn-magnetic inline-flex h-12 items-center justify-center gap-2.5 rounded-lg border border-white/12 px-6 text-sm font-bold text-white transition-all duration-300 hover:border-neon/40 hover:text-neon"
+              className="btn-magnetic glass-button inline-flex h-12 items-center justify-center gap-2.5 rounded-lg px-6 text-sm font-bold text-white"
             >
               <Mail size={16} aria-hidden="true" />
               Contact Me
@@ -196,7 +196,7 @@ export default function Hero() {
               <a
                 key={social.label}
                 href={social.href}
-                className="flex h-10 w-10 items-center justify-center rounded-lg border border-white/8 text-muted transition-all duration-300 hover:border-neon/30 hover:text-neon hover:shadow-neon"
+                className="glass-button flex h-10 w-10 items-center justify-center rounded-lg text-muted hover:text-neon"
                 aria-label={social.label}
                 target={social.label !== 'Email' ? '_blank' : undefined}
                 rel={social.label !== 'Email' ? 'noopener noreferrer' : undefined}
@@ -224,7 +224,7 @@ export default function Hero() {
 
               {/* Profile image */}
               <div className="mb-7">
-                <div className="relative mx-auto aspect-square w-44 overflow-hidden rounded-xl border border-white/10 bg-white/[0.04] sm:w-52">
+                <div className="glass-pill relative mx-auto aspect-square w-44 overflow-hidden rounded-xl sm:w-52">
                   <div className="absolute inset-0 bg-gradient-to-br from-neon/8 via-transparent to-electric/10" />
                   <img
                     src={`${import.meta.env.BASE_URL}assets/me.png`}
@@ -255,7 +255,7 @@ export default function Hero() {
                   <motion.div
                     key={label}
                     variants={item}
-                    className="rounded-lg border border-white/8 bg-white/[0.03] p-4 transition-colors duration-300 hover:border-neon/20"
+                    className="glass-pill rounded-xl p-4"
                   >
                     <Icon className="mb-3 text-neon/70" size={20} aria-hidden="true" />
                     <p className="text-sm font-semibold text-secondary">{label}</p>

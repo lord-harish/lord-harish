@@ -36,8 +36,8 @@ export default function Skills() {
               onClick={() => setActiveFilter(name)}
               className={`rounded-lg px-4 py-2 text-xs font-bold uppercase tracking-[0.12em] transition-all duration-300 ${
                 activeFilter === name
-                  ? 'border border-neon/40 bg-neon/10 text-neon shadow-neon'
-                  : 'border border-white/8 bg-white/[0.03] text-muted hover:border-white/15 hover:text-white'
+                  ? 'glass-pill border-neon/40 text-neon shadow-neon'
+                  : 'glass-button text-muted hover:text-white'
               }`}
             >
               {name}
@@ -65,7 +65,7 @@ export default function Skills() {
                   <motion.span
                     animate={{ y: [0, -6, 0] }}
                     transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut', delay: index * 0.2 }}
-                    className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg border border-neon/15 bg-neon/[0.06] text-neon/70 transition-all duration-300 group-hover:border-neon/40 group-hover:text-neon group-hover:shadow-neon"
+                    className="glass-pill flex h-12 w-12 shrink-0 items-center justify-center rounded-lg text-neon/70 group-hover:text-neon"
                   >
                     <Icon size={22} aria-hidden="true" />
                   </motion.span>
@@ -77,7 +77,7 @@ export default function Skills() {
                   {skills.map((skill) => (
                     <span
                       key={skill}
-                      className="rounded-lg border border-white/8 bg-white/[0.03] px-3 py-2 text-xs font-semibold text-secondary transition-all duration-300 group-hover:border-neon/15 group-hover:text-white"
+                      className="glass-pill rounded-lg px-3 py-1.5 text-xs font-semibold text-secondary group-hover:text-white"
                     >
                       {skill}
                     </span>
