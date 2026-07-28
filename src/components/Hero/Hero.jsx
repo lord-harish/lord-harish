@@ -166,7 +166,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-            className="font-display mt-2 text-3xl font-extrabold tracking-tight sm:mt-3 sm:text-5xl md:text-6xl lg:text-7xl leading-[1.08]"
+            className="font-display mt-2 text-5xl font-extrabold tracking-tight sm:mt-3 sm:text-5xl md:text-6xl lg:text-7xl leading-[1.08]"
           >
             <span className="block text-white">Student &</span>
             <span className="mt-1 block min-h-[1.2em]">
