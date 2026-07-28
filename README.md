@@ -33,10 +33,6 @@ Passionate About:
   - Home Automation
   - Full Stack Development
 
-Currently Building:
-  Smart Restroom Occupancy Indicator
-  using ESP32-H2 + Zigbee + Home Assistant
-
 Goal:
   Build intelligent products that solve real-world problems.
 ```
