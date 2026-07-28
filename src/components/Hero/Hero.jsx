@@ -72,7 +72,19 @@ function TypingText() {
   return (
     <span className="inline-flex items-center text-neon">
       <span>{currentText}</span>
-      <span className="ml-1 inline-block h-[0.85em] w-[3px] animate-pulse rounded-full bg-neon shadow-neon" />
+      <motion.span
+        animate={
+          phase === 'PAUSED' || phase === 'WAIT_NEXT'
+            ? { opacity: [1, 0, 1] }
+            : { opacity: 1 }
+        }
+        transition={
+          phase === 'PAUSED' || phase === 'WAIT_NEXT'
+            ? { duration: 0.75, repeat: Infinity, ease: 'easeInOut' }
+            : { duration: 0.1 }
+        }
+        className="ml-1.5 inline-block h-[0.85em] w-[3.5px] rounded-full bg-neon shadow-neon"
+      />
     </span>
   );
 }
@@ -84,7 +96,7 @@ function AnimatedName({ text }) {
     <motion.span
       initial="hidden"
       animate="visible"
-      className="inline-flex flex-wrap items-baseline gap-[0.01em] text-xl font-black tracking-tight sm:text-3xl md:text-4xl lg:text-5xl"
+      className="font-display inline-flex flex-wrap items-baseline gap-[0.01em] text-xl font-bold tracking-tight sm:text-3xl md:text-4xl lg:text-5xl"
     >
       {letters.map((char, i) => (
         <motion.span
@@ -120,7 +132,7 @@ function AnimatedName({ text }) {
             scale: 1.12,
             transition: { duration: 0.15 },
           }}
-          className="inline-block cursor-default select-none font-black"
+          className="inline-block cursor-default select-none font-bold"
         >
           {char === ' ' ? '\u00A0' : char}
         </motion.span>
@@ -154,7 +166,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-            className="mt-2 text-2xl font-extrabold tracking-tight sm:mt-3 sm:text-4xl lg:text-5xl leading-tight"
+            className="font-display mt-2 text-3xl font-extrabold tracking-tight sm:mt-3 sm:text-5xl md:text-6xl lg:text-7xl leading-[1.08]"
           >
             <span className="block text-white">Student &</span>
             <span className="mt-1 block min-h-[1.2em]">
