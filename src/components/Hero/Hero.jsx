@@ -1,202 +1,210 @@
-import { useRef, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight, ChevronDown, Github, Linkedin, Mail } from 'lucide-react';
-import GlassCard from '../GlassCard/GlassCard.jsx';
-import { focusItems, roles, signals } from '../../data/profile.js';
+import { ArrowDown, Github, Linkedin, Mail } from 'lucide-react';
+import { focusItems, signals } from '../../data/profile.js';
 import { emailUrl, githubUrl, linkedinUrl } from '../../data/links.js';
 
-/* ── Split-text character animation ───────────────────────────────── */
-function SplitText({ text, className }) {
-  return (
-    <span className={className} aria-label={text}>
-      {text.split('').map((char, i) => (
-        <motion.span
-          key={`${char}-${i}`}
-          initial={{ opacity: 0, y: 40, filter: 'blur(8px)' }}
-          animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-          transition={{
-            duration: 0.5,
-            delay: 0.3 + i * 0.035,
-            ease: [0.22, 1, 0.36, 1],
-          }}
-          className="inline-block"
-          aria-hidden="true"
-        >
-          {char === ' ' ? '\u00A0' : char}
-        </motion.span>
-      ))}
-    </span>
-  );
-}
-
-/* ── Animated role text ───────────────────────────────────────────── */
-function AnimatedRoles() {
-  const roleList = roles.split(' • ');
-  const [current, setCurrent] = useState(0);
-
-  useEffect(() => {
-    const timer = setInterval(() => setCurrent((c) => (c + 1) % roleList.length), 3000);
-    return () => clearInterval(timer);
-  }, [roleList.length]);
-
-  return (
-    <div className="relative h-8 overflow-hidden">
-      {roleList.map((role, i) => (
-        <motion.span
-          key={role}
-          className="absolute left-0 top-0 whitespace-nowrap text-lg font-semibold text-electric sm:text-xl"
-          initial={false}
-          animate={{
-            y: i === current ? 0 : i < current ? -32 : 32,
-            opacity: i === current ? 1 : 0,
-          }}
-          transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-        >
-          {role}
-        </motion.span>
-      ))}
-    </div>
-  );
-}
-
-/* ── Spotlight effect following cursor ────────────────────────────── */
-function useSpotlight(ref) {
-  const [position, setPosition] = useState({ x: 50, y: 50 });
-
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-
-    const handleMove = (e) => {
-      const rect = el.getBoundingClientRect();
-      setPosition({
-        x: ((e.clientX - rect.left) / rect.width) * 100,
-        y: ((e.clientY - rect.top) / rect.height) * 100,
-      });
-    };
-
-    el.addEventListener('mousemove', handleMove);
-    return () => el.removeEventListener('mousemove', handleMove);
-  }, [ref]);
-
-  return position;
-}
-
-/* ── Social icons ─────────────────────────────────────────────────── */
 const socialLinks = [
   { href: githubUrl, icon: Github, label: 'GitHub' },
   { href: linkedinUrl, icon: Linkedin, label: 'LinkedIn' },
   { href: emailUrl, icon: Mail, label: 'Email' },
 ];
 
-/* ── Container / item reveal variants ─────────────────────────────── */
-const container = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.1, delayChildren: 0.6 },
-  },
-};
+const typeWords = [
+  'Full Stack Builder',
+  'AI Developer',
+  'Data Analyst',
+  'IoT Innovator',
+  'AI-Powered Trader',
+  'Automation Builder',
+  'UI/UX Developer',
+];
 
-const item = {
-  hidden: { opacity: 0, y: 24, filter: 'blur(6px)' },
-  visible: {
-    opacity: 1,
-    y: 0,
-    filter: 'blur(0px)',
-    transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] },
-  },
-};
+function TypingText() {
+  const [wordIndex, setWordIndex] = useState(0);
+  const [currentText, setCurrentText] = useState('');
+  const [phase, setPhase] = useState('TYPING'); // 'TYPING' | 'PAUSED' | 'DELETING' | 'WAIT_NEXT'
 
-export default function Hero() {
-  const sectionRef = useRef(null);
+  useEffect(() => {
+    const targetWord = typeWords[wordIndex];
+
+    switch (phase) {
+      case 'TYPING': {
+        if (currentText.length < targetWord.length) {
+          const timer = setTimeout(() => {
+            setCurrentText(targetWord.slice(0, currentText.length + 1));
+          }, 75);
+          return () => clearTimeout(timer);
+        }
+        setPhase('PAUSED');
+        break;
+      }
+
+      case 'PAUSED': {
+        // Smooth 2-second pause when title finishes typing
+        const timer = setTimeout(() => {
+          setPhase('DELETING');
+        }, 2000);
+        return () => clearTimeout(timer);
+      }
+
+      case 'DELETING': {
+        if (currentText.length > 0) {
+          const timer = setTimeout(() => {
+            setCurrentText(targetWord.slice(0, currentText.length - 1));
+          }, 35);
+          return () => clearTimeout(timer);
+        }
+        setPhase('WAIT_NEXT');
+        break;
+      }
+
+      case 'WAIT_NEXT': {
+        const timer = setTimeout(() => {
+          setWordIndex((prev) => (prev + 1) % typeWords.length);
+          setPhase('TYPING');
+        }, 300);
+        return () => clearTimeout(timer);
+      }
+    }
+  }, [currentText, phase, wordIndex]);
 
   return (
-    <section
-      ref={sectionRef}
-      id="home"
-      className="relative z-10 flex min-h-screen items-center px-4 pb-16 pt-28 sm:px-6 lg:px-8"
+    <span className="inline-flex items-center text-neon">
+      <span>{currentText}</span>
+      <span className="ml-1 inline-block h-[0.85em] w-[3px] animate-pulse rounded-full bg-neon shadow-neon" />
+    </span>
+  );
+}
+
+function AnimatedName({ text }) {
+  const letters = text.split('');
+
+  return (
+    <motion.span
+      initial="hidden"
+      animate="visible"
+      className="inline-flex flex-wrap items-baseline gap-[0.01em] text-xl font-black tracking-tight sm:text-3xl md:text-4xl lg:text-5xl"
     >
-      <div className="relative z-10 mx-auto grid w-full max-w-7xl items-center gap-16 lg:grid-cols-[1.15fr_0.85fr]">
-        {/* ── Left: Content ──────────────────────────────────────── */}
-        <div className="max-w-3xl">
-          {/* Availability badge */}
-          <motion.div
+      {letters.map((char, i) => (
+        <motion.span
+          key={`${char}-${i}`}
+          variants={{
+            hidden: { opacity: 0, y: 16, filter: 'blur(4px)', scale: 0.9 },
+            visible: {
+              opacity: 1,
+              y: 0,
+              filter: 'blur(0px)',
+              scale: 1,
+              transition: {
+                duration: 0.4,
+                delay: 0.1 + i * 0.035,
+                ease: [0.22, 1, 0.36, 1],
+              },
+            },
+          }}
+          animate={{
+            color: ['#00FF88', '#3CFFB0', '#70FFC2', '#00FF88'],
+            textShadow: [
+              '0 0 12px rgba(0,255,136,0.6)',
+              '0 0 24px rgba(60,255,176,0.85)',
+              '0 0 12px rgba(0,255,136,0.6)',
+            ],
+          }}
+          transition={{
+            color: { duration: 3.5, repeat: Infinity, ease: 'easeInOut', delay: i * 0.1 },
+            textShadow: { duration: 3.5, repeat: Infinity, ease: 'easeInOut', delay: i * 0.1 },
+          }}
+          whileHover={{
+            y: -4,
+            scale: 1.12,
+            transition: { duration: 0.15 },
+          }}
+          className="inline-block cursor-default select-none font-black"
+        >
+          {char === ' ' ? '\u00A0' : char}
+        </motion.span>
+      ))}
+    </motion.span>
+  );
+}
+
+export default function Hero() {
+  return (
+    <section
+      id="home"
+      className="relative z-10 flex min-h-screen items-center px-4 pb-12 pt-24 sm:px-6 lg:px-8 lg:pt-28"
+    >
+      <div className="mx-auto grid w-full max-w-7xl items-center gap-10 lg:grid-cols-[1.15fr_0.85fr]">
+        {/* Left Column: 3 Texts + Signals & Socials */}
+        <div className="text-center lg:text-left">
+          {/* Greeting Subtitle */}
+          <motion.p
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+            className="flex flex-wrap items-baseline justify-center gap-2 text-sm font-medium text-secondary/90 sm:text-base lg:justify-start"
+          >
+            <span>Hi! I&apos;m</span>
+            <AnimatedName text="Harish Pranav V" />
+          </motion.p>
+
+          {/* Headline */}
+          <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-            className="glass-pill mb-8 inline-flex items-center gap-3 rounded-full px-4 py-2"
+            className="mt-3 text-2xl font-extrabold tracking-tight sm:text-4xl lg:text-5xl leading-tight"
           >
-            <span className="relative flex h-2.5 w-2.5">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-neon opacity-60" />
-              <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-neon" />
+            <span className="block text-white">Student &</span>
+            <span className="mt-1 block min-h-[1.2em]">
+              <TypingText />
             </span>
-            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-neon">
-              Available for Opportunities
-            </span>
-          </motion.div>
+          </motion.h1>
 
-          {/* Name — split text animation */}
-          <h1 className="text-balance text-5xl font-black leading-[1.05] tracking-tight sm:text-6xl lg:text-7xl">
-            <SplitText text="Harish Pranav V" className="neon-text" />
-          </h1>
-
-          {/* Animated rotating roles */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 1, duration: 0.6 }}
-            className="mt-6"
-          >
-            <AnimatedRoles />
-          </motion.div>
-
-          {/* Description */}
+          {/* Short Two-Line Subtext Intro */}
           <motion.p
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.2, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-            className="mt-6 max-w-2xl text-base leading-8 text-secondary sm:text-lg"
+            transition={{ duration: 0.5, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+            className="mx-auto mt-4 max-w-xl text-xs leading-relaxed text-secondary/80 sm:text-sm md:text-base lg:mx-0"
           >
-            Diploma graduate transitioning into a lateral B.E/B.Tech journey, passionate about building intelligent
-            systems using AI, Machine Learning, IoT, Automation, and Data Analytics to solve real-world problems.
+            I build intelligent systems, IoT innovations, and data-driven web applications that solve real-world problems.
           </motion.p>
 
-          {/* CTAs */}
+          {/* Signals & Focus Info Pills */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.4, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-            className="mt-10 flex flex-col gap-4 sm:flex-row sm:flex-wrap"
+            transition={{ duration: 0.5, delay: 0.3 }}
+            className="mt-6 flex flex-wrap justify-center gap-2 sm:gap-2.5 lg:justify-start"
           >
-            <a
-              href="#projects"
-              className="btn-magnetic group inline-flex h-12 items-center justify-center gap-2.5 rounded-lg bg-neon px-6 text-sm font-bold text-void shadow-neon transition-all duration-300 hover:shadow-neon-lg"
-            >
-              Explore My Projects
-              <ArrowRight size={16} className="transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true" />
-            </a>
-            <a
-              href={emailUrl}
-              className="btn-magnetic glass-button inline-flex h-12 items-center justify-center gap-2.5 rounded-lg px-6 text-sm font-bold text-white"
-            >
-              <Mail size={16} aria-hidden="true" />
-              Contact Me
-            </a>
+            {signals.map(({ label, icon: Icon }) => (
+              <div key={label} className="glass-pill flex items-center gap-2 rounded-full px-3 py-1.5 text-xs font-semibold text-white/90 sm:px-3.5">
+                <Icon size={14} className="text-neon" />
+                <span>{label}</span>
+              </div>
+            ))}
+            {focusItems.map((focusItem) => (
+              <div key={focusItem} className="glass-pill flex items-center gap-2 rounded-full px-3 py-1.5 text-xs font-semibold text-secondary sm:px-3.5">
+                <span className="h-1.5 w-1.5 rounded-full bg-neon shadow-neon" />
+                <span>{focusItem}</span>
+              </div>
+            ))}
           </motion.div>
 
-          {/* Social icons */}
+          {/* Social links row */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 1.6, duration: 0.6 }}
-            className="mt-8 flex items-center gap-3"
+            transition={{ delay: 0.4, duration: 0.5 }}
+            className="mt-6 flex items-center justify-center gap-3 lg:justify-start"
           >
             {socialLinks.map((social) => (
               <a
                 key={social.label}
                 href={social.href}
-                className="glass-button flex h-10 w-10 items-center justify-center rounded-lg text-muted hover:text-neon"
+                className="glass-button flex h-10 w-10 items-center justify-center rounded-full text-muted transition-colors hover:text-neon"
                 aria-label={social.label}
                 target={social.label !== 'Email' ? '_blank' : undefined}
                 rel={social.label !== 'Email' ? 'noopener noreferrer' : undefined}
@@ -207,97 +215,35 @@ export default function Hero() {
           </motion.div>
         </div>
 
-        {/* ── Right: Profile Card ────────────────────────────────── */}
+        {/* Right Column: Normal Formal Stylish Portrait Picture Frame */}
         <motion.div
-          initial={{ opacity: 0, x: 60, scale: 0.95 }}
-          animate={{ opacity: 1, x: 0, scale: 1 }}
-          transition={{ duration: 0.9, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
-          className="relative"
+          initial={{ opacity: 0, y: 30, scale: 0.96 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          transition={{ duration: 0.7, delay: 0.35, ease: [0.22, 1, 0.36, 1] }}
+          className="relative mx-auto w-full max-w-[210px] sm:max-w-[260px] lg:mr-0 lg:max-w-[320px]"
         >
-          <motion.div
-            animate={{ y: [0, -12, 0] }}
-            transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
-          >
-            <GlassCard className="gradient-border relative overflow-hidden p-6 sm:p-8">
-              {/* Top accent line */}
-              <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-neon/60 to-transparent" />
+          {/* Outer Subtle Glow Rim */}
+          <div className="absolute -inset-1 rounded-3xl bg-gradient-to-tr from-neon/30 via-neon/10 to-transparent blur-md opacity-50" />
 
-              {/* Profile image */}
-              <div className="mb-7">
-                <div className="glass-pill relative mx-auto aspect-square w-44 overflow-hidden rounded-xl sm:w-52">
-                  <div className="absolute inset-0 bg-gradient-to-br from-neon/8 via-transparent to-electric/10" />
-                  <img
-                    src={`${import.meta.env.BASE_URL}assets/me.png`}
-                    alt="Portrait of Harish Pranav V"
-                    className="h-full w-full object-cover object-center transition duration-700 hover:scale-105"
-                    width={208}
-                    height={208}
-                  />
-                </div>
-              </div>
+          {/* Main Formal Stylish Glass Frame */}
+          <div className="glass-panel relative overflow-hidden rounded-3xl border border-white/20 p-3 sm:p-3.5 shadow-2xl">
+            {/* Top Accent Specular Line */}
+            <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-neon/60 to-transparent" />
 
-              {/* Status */}
-              <div className="mb-7">
-                <p className="text-[0.65rem] font-bold uppercase tracking-[0.3em] text-neon/70">Status</p>
-                <h2 className="mt-2 text-xl font-black uppercase tracking-[0.1em] text-white sm:text-2xl">
-                  Building The Future
-                </h2>
-              </div>
+            {/* Picture Container */}
+            <div className="relative aspect-[4/5] w-full overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-b from-neon/15 via-void to-void">
+              <img
+                src={`${import.meta.env.BASE_URL}assets/me.png`}
+                alt="Portrait of Harish Pranav V"
+                className="h-full w-full object-cover object-top transition duration-700 hover:scale-105"
+              />
 
-              {/* Signal cards */}
-              <motion.div
-                variants={container}
-                initial="hidden"
-                animate="visible"
-                className="mb-7 grid gap-3 sm:grid-cols-2"
-              >
-                {signals.map(({ label, icon: Icon }) => (
-                  <motion.div
-                    key={label}
-                    variants={item}
-                    className="glass-pill rounded-xl p-4"
-                  >
-                    <Icon className="mb-3 text-neon/70" size={20} aria-hidden="true" />
-                    <p className="text-sm font-semibold text-secondary">{label}</p>
-                  </motion.div>
-                ))}
-              </motion.div>
-
-              {/* Focus items */}
-              <div>
-                <p className="mb-4 text-sm font-bold text-white">Current Focus:</p>
-                <ul className="space-y-2.5">
-                  {focusItems.map((focusItem) => (
-                    <li key={focusItem} className="flex items-center gap-3 text-sm font-medium text-secondary">
-                      <span className="h-1 w-1 rounded-full bg-neon shadow-neon" aria-hidden="true" />
-                      {focusItem}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </GlassCard>
-          </motion.div>
+              {/* Bottom Shadow Overlay */}
+              <div className="pointer-events-none absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-void via-void/30 to-transparent" />
+            </div>
+          </div>
         </motion.div>
       </div>
-
-      {/* Scroll indicator */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 2.5, duration: 1 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2"
-      >
-        <motion.a
-          href="#about"
-          animate={{ y: [0, 8, 0] }}
-          transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-          className="flex flex-col items-center gap-2 text-muted transition-colors duration-300 hover:text-neon"
-          aria-label="Scroll to about section"
-        >
-          <span className="text-[0.6rem] font-semibold uppercase tracking-[0.3em]">Scroll</span>
-          <ChevronDown size={16} />
-        </motion.a>
-      </motion.div>
     </section>
   );
 }

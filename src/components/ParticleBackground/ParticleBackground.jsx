@@ -1,98 +1,77 @@
 import { motion } from 'framer-motion';
 
-const particles = Array.from({ length: 16 }, (_, index) => ({
-  id: index,
-  left: `${(index * 43 + 11) % 100}%`,
-  top: `${(index * 61 + 7) % 100}%`,
-  size: 1.5 + (index % 3),
-  delay: (index % 6) * 0.5,
-  duration: 10 + (index % 5) * 2,
-}));
+const dynamicOrbs = [
+  {
+    id: 1,
+    size: 'h-[350px] w-[350px] sm:h-[500px] sm:w-[500px]',
+    color: 'radial-gradient(circle, rgba(0, 255, 136, 0.25) 0%, transparent 70%)',
+    blur: 'blur(90px)',
+    x: [0, 120, -80, 0],
+    y: [0, -100, 60, 0],
+    scale: [1, 1.2, 0.85, 1],
+    duration: 18,
+    position: '-left-[10%] -top-[10%]',
+  },
+  {
+    id: 2,
+    size: 'h-[300px] w-[300px] sm:h-[450px] sm:w-[450px]',
+    color: 'radial-gradient(circle, rgba(60, 255, 176, 0.2) 0%, transparent 70%)',
+    blur: 'blur(100px)',
+    x: [0, -100, 70, 0],
+    y: [0, 90, -80, 0],
+    scale: [1, 0.85, 1.25, 1],
+    duration: 22,
+    position: '-right-[10%] top-[15%]',
+  },
+  {
+    id: 3,
+    size: 'h-[280px] w-[280px] sm:h-[400px] sm:w-[400px]',
+    color: 'radial-gradient(circle, rgba(0, 255, 136, 0.18) 0%, transparent 70%)',
+    blur: 'blur(110px)',
+    x: [0, 90, -110, 0],
+    y: [0, -70, 90, 0],
+    scale: [0.9, 1.2, 0.95, 0.9],
+    duration: 25,
+    position: 'left-[20%] top-[45%]',
+  },
+  {
+    id: 4,
+    size: 'h-[320px] w-[320px] sm:h-[480px] sm:w-[480px]',
+    color: 'radial-gradient(circle, rgba(60, 255, 176, 0.15) 0%, transparent 70%)',
+    blur: 'blur(95px)',
+    x: [0, -80, 100, 0],
+    y: [0, 110, -60, 0],
+    scale: [1.1, 0.9, 1.15, 1.1],
+    duration: 20,
+    position: 'right-[15%] bottom-[10%]',
+  },
+];
 
 export default function ParticleBackground() {
   return (
     <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden" aria-hidden="true">
-      {/* Subtle grid */}
-      <div className="grid-mask absolute inset-0 opacity-40" />
+      {/* Subtle grid mask */}
+      <div className="grid-mask absolute inset-0 opacity-20" />
 
-      {/* Aurora mesh - primary */}
-      <motion.div
-        animate={{
-          transform: [
-            'translate(0%, 0%) rotate(0deg) scale(1)',
-            'translate(5%, 3%) rotate(2deg) scale(1.05)',
-            'translate(-3%, 5%) rotate(-1deg) scale(0.97)',
-            'translate(3%, -2%) rotate(1deg) scale(1.02)',
-            'translate(0%, 0%) rotate(0deg) scale(1)',
-          ],
-        }}
-        transition={{ duration: 20, repeat: Infinity, ease: 'easeInOut' }}
-        className="absolute -left-[20%] -top-[10%] h-[60vh] w-[60vw] rounded-full opacity-[0.07]"
-        style={{
-          background: 'radial-gradient(ellipse at center, #00FF88 0%, transparent 70%)',
-          filter: 'blur(80px)',
-        }}
-      />
-
-      {/* Aurora mesh - secondary */}
-      <motion.div
-        animate={{
-          transform: [
-            'translate(0%, 0%) rotate(0deg) scale(1)',
-            'translate(-4%, -3%) rotate(-2deg) scale(1.03)',
-            'translate(5%, -5%) rotate(1deg) scale(0.96)',
-            'translate(-2%, 4%) rotate(-0.5deg) scale(1.01)',
-            'translate(0%, 0%) rotate(0deg) scale(1)',
-          ],
-        }}
-        transition={{ duration: 25, repeat: Infinity, ease: 'easeInOut' }}
-        className="absolute -right-[15%] top-[20%] h-[50vh] w-[50vw] rounded-full opacity-[0.05]"
-        style={{
-          background: 'radial-gradient(ellipse at center, #3CFFB0 0%, transparent 70%)',
-          filter: 'blur(100px)',
-        }}
-      />
-
-      {/* Aurora mesh - tertiary warm */}
-      <motion.div
-        animate={{
-          transform: [
-            'translate(0%, 0%) scale(1)',
-            'translate(3%, 5%) scale(1.04)',
-            'translate(-5%, 2%) scale(0.98)',
-            'translate(0%, 0%) scale(1)',
-          ],
-        }}
-        transition={{ duration: 30, repeat: Infinity, ease: 'easeInOut' }}
-        className="absolute -bottom-[10%] left-[20%] h-[40vh] w-[40vw] rounded-full opacity-[0.04]"
-        style={{
-          background: 'radial-gradient(ellipse at center, #00FF88 0%, transparent 65%)',
-          filter: 'blur(120px)',
-        }}
-      />
-
-      {/* Floating particles */}
-      {particles.map((particle) => (
-        <motion.span
-          key={particle.id}
-          className="absolute rounded-full"
-          style={{
-            left: particle.left,
-            top: particle.top,
-            width: particle.size,
-            height: particle.size,
-            background: 'rgba(0, 255, 136, 0.6)',
-            boxShadow: '0 0 12px rgba(0, 255, 136, 0.4)',
-          }}
+      {/* Dynamic Moving Blurred Orbs */}
+      {dynamicOrbs.map((orb) => (
+        <motion.div
+          key={orb.id}
           animate={{
-            y: [0, -30, 0],
-            opacity: [0.1, 0.6, 0.1],
+            x: orb.x,
+            y: orb.y,
+            scale: orb.scale,
           }}
           transition={{
-            delay: particle.delay,
-            duration: particle.duration,
+            duration: orb.duration,
             repeat: Infinity,
+            repeatType: 'mirror',
             ease: 'easeInOut',
+          }}
+          className={`absolute rounded-full ${orb.size} ${orb.position}`}
+          style={{
+            background: orb.color,
+            filter: orb.blur,
           }}
         />
       ))}
