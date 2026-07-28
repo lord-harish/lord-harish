@@ -3,7 +3,6 @@ import Navbar from './components/Navbar/Navbar.jsx';
 import Footer from './components/Footer/Footer.jsx';
 import ParticleBackground from './components/ParticleBackground/ParticleBackground.jsx';
 import ScrollProgress from './components/ScrollProgress/ScrollProgress.jsx';
-import CursorGlow from './components/CursorGlow/CursorGlow.jsx';
 import HeroSection from './sections/HeroSection.jsx';
 import AboutSection from './sections/AboutSection.jsx';
 import SkillsSection from './sections/SkillsSection.jsx';
@@ -33,7 +32,6 @@ export default function App() {
   return (
     <div className="min-h-screen overflow-hidden bg-void text-white/90 antialiased">
       <ParticleBackground />
-      <CursorGlow />
       <ScrollProgress />
       <Navbar />
       <Routes>

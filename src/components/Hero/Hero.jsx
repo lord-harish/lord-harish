@@ -110,7 +110,6 @@ const item = {
 
 export default function Hero() {
   const sectionRef = useRef(null);
-  const spotlight = useSpotlight(sectionRef);
 
   return (
     <section
@@ -118,15 +117,6 @@ export default function Hero() {
       id="home"
       className="relative z-10 flex min-h-screen items-center px-4 pb-16 pt-28 sm:px-6 lg:px-8"
     >
-      {/* Spotlight cursor glow */}
-      <div
-        className="pointer-events-none absolute inset-0 z-0 opacity-20 transition-opacity duration-700"
-        style={{
-          background: `radial-gradient(600px circle at ${spotlight.x}% ${spotlight.y}%, rgba(0,255,136,0.08), transparent 60%)`,
-        }}
-        aria-hidden="true"
-      />
-
       <div className="relative z-10 mx-auto grid w-full max-w-7xl items-center gap-16 lg:grid-cols-[1.15fr_0.85fr]">
         {/* ── Left: Content ──────────────────────────────────────── */}
         <div className="max-w-3xl">
