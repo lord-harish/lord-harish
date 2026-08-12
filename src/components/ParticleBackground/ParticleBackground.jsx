@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import Particles from '../Particles/Particles.jsx';
 
 const dynamicOrbs = [
   {
@@ -75,6 +76,21 @@ export default function ParticleBackground() {
           }}
         />
       ))}
+
+      {/* WebGL Particles Effect */}
+      <div className="absolute inset-0 z-0 opacity-80">
+        <Particles
+          particleColors={['#00ffa5']}
+          particleCount={600}
+          particleSpread={10}
+          speed={0.2}
+          particleBaseSize={100}
+          moveParticlesOnHover={false}
+          alphaParticles
+          disableRotation
+          pixelRatio="5"
+        />
+      </div>
     </div>
   );
 }

@@ -119,6 +119,8 @@ a {
   box-shadow: 0 0 20px rgba(0, 255, 136, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.22);
 }
 
+
+
 /* High Translucency Glass Button */
 .glass-button {
   border: 1px solid rgba(255, 255, 255, 0.14);
@@ -153,7 +155,7 @@ a {
   z-index: 0;
 }
 
-.glass-panel > * {
+.glass-panel>* {
   position: relative;
   z-index: 1;
 }
@@ -281,6 +283,7 @@ a {
 
 /* ── Reduced Motion ───────────────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
+
   *,
   *::before,
   *::after {

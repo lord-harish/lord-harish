@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowDown, Github, Linkedin, Mail } from 'lucide-react';
+import TextPressure from '../TextPressure/TextPressure.jsx';
 import { focusItems, signals } from '../../data/profile.js';
 import { emailUrl, githubUrl, linkedinUrl } from '../../data/links.js';
 
@@ -89,58 +90,6 @@ function TypingText() {
   );
 }
 
-function AnimatedName({ text }) {
-  const letters = text.split('');
-
-  return (
-    <motion.span
-      initial="hidden"
-      animate="visible"
-      className="font-display inline-flex flex-wrap items-baseline gap-[0.01em] text-xl font-bold tracking-tight sm:text-3xl md:text-4xl lg:text-5xl"
-    >
-      {letters.map((char, i) => (
-        <motion.span
-          key={`${char}-${i}`}
-          variants={{
-            hidden: { opacity: 0, y: 16, filter: 'blur(4px)', scale: 0.9 },
-            visible: {
-              opacity: 1,
-              y: 0,
-              filter: 'blur(0px)',
-              scale: 1,
-              transition: {
-                duration: 0.4,
-                delay: 0.1 + i * 0.035,
-                ease: [0.22, 1, 0.36, 1],
-              },
-            },
-          }}
-          animate={{
-            color: ['#00FF88', '#3CFFB0', '#70FFC2', '#00FF88'],
-            textShadow: [
-              '0 0 12px rgba(0,255,136,0.6)',
-              '0 0 24px rgba(60,255,176,0.85)',
-              '0 0 12px rgba(0,255,136,0.6)',
-            ],
-          }}
-          transition={{
-            color: { duration: 3.5, repeat: Infinity, ease: 'easeInOut', delay: i * 0.1 },
-            textShadow: { duration: 3.5, repeat: Infinity, ease: 'easeInOut', delay: i * 0.1 },
-          }}
-          whileHover={{
-            y: -4,
-            scale: 1.12,
-            transition: { duration: 0.15 },
-          }}
-          className="inline-block cursor-default select-none font-bold"
-        >
-          {char === ' ' ? '\u00A0' : char}
-        </motion.span>
-      ))}
-    </motion.span>
-  );
-}
-
 export default function Hero() {
   return (
     <section
@@ -150,16 +99,32 @@ export default function Hero() {
       <div className="mx-auto grid w-full max-w-7xl items-center gap-6 sm:gap-8 lg:grid-cols-[1.15fr_0.85fr] lg:gap-10">
         {/* Left Column: 3 Texts + Signals & Socials */}
         <div className="text-center lg:text-left">
-          {/* Greeting Subtitle */}
-          <motion.p
+          {/* Greeting & Interactive Variable Font Name */}
+          <motion.div
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-            className="flex flex-wrap items-baseline justify-center gap-2 text-sm font-medium text-secondary/90 sm:text-base lg:justify-start"
+            className="mb-2"
           >
-            <span>Hi! I&apos;m</span>
-            <AnimatedName text="Harish Pranav V" />
-          </motion.p>
+            <div className="flex items-center justify-center gap-2 lg:justify-start">
+              <span className="text-xs font-bold uppercase tracking-[0.25em] text-neon/80">
+                Hi! I&apos;m
+              </span>
+            </div>
+            <div className="relative mt-1 h-12 w-full max-w-sm sm:h-14 sm:max-w-md md:h-16 md:max-w-lg lg:mx-0 mx-auto">
+              <TextPressure
+                text="Harish Pranav V"
+                flex={true}
+                alpha={false}
+                stroke={false}
+                width={true}
+                weight={true}
+                italic={true}
+                textColor="#00FF88"
+                minFontSize={20}
+              />
+            </div>
+          </motion.div>
 
           {/* Headline */}
           <motion.h1
