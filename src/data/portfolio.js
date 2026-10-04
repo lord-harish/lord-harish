@@ -1,5 +1,6 @@
 import {
   Award,
+  BookOpen,
   Bot,
   BrainCircuit,
   BriefcaseBusiness,
@@ -302,6 +303,29 @@ export const achievements = [
     description:
       'Continuously improving skills in team Collaboration, problem solving, and technical expertise by participating in various inter college events and competitions focused on emerging technologies and real-world solutions.',
     highlights: ['paper presentation', 'Quiz', 'technical Quiz', 'Association Head', 'NSS PSGPTC', 'Project expo'],
+  },
+  {
+    title: 'Infosys Certificates',
+    icon: BookOpen,
+    badge: 'Certifications',
+    images: [
+      '/assets/achievements/achievement-7-1.jpg',
+      '/assets/achievements/achievement-7-2.jpg',
+      '/assets/achievements/achievement-7-3.jpg',
+      '/assets/achievements/achievement-7-4.jpg',
+      '/assets/achievements/achievement-7-5.jpg',
+      '/assets/achievements/achievement-7-6.jpg',
+    ],
+    description:
+      'Earned industry-recognized certifications from Infosys Springboard and Udemy in SQL, RDBMS, ER Modeling, Deep Learning, Generative AI, Gemini, and Prompt Engineering, strengthening skills in AI, data, and modern software technologies.',
+    highlights: [
+      'Database Fundamentals & SQL',
+      'Relational Database Management System',
+      'ER Modeling',
+      'Deep Learning for Developers',
+      'Generative Models for Developers',
+      'Google Gemini & Prompt Engineering',
+    ],
   },
 ];
 
